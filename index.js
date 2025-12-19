@@ -19,13 +19,19 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3001'],
+    origin: ['http://localhost:5173', 'http://localhost:5174', 'https://cosmic-froyo-06a9f7.netlify.app'],
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    exposedHeaders: ['Set-Cookie'],
+    optionsSuccessStatus: 200,
+    preflightContinue: false
 }
 
 app.use(cors(corsOptions));
+
+// Handle preflight requests explicitly
+app.options('*', cors(corsOptions));
 
 const PORT = process.env.PORT || 3000;
 
