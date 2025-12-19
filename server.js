@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 const corsOptions = {
     origin: [
-        'https://cosmic-froyo-06a9f7.netlify.app/',
+        'https://cosmic-froyo-06a9f7.netlify.app',
         'http://localhost:5173',
         'http://localhost:5174'
     ],
