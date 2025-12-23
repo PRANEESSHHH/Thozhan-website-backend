@@ -19,7 +19,7 @@ const corsOptions = {
         const allowedOrigins = [
             'http://localhost:5173', 
             'http://localhost:5174', 
-            'https://cosmic-froyo-06a9f7.netlify.app',
+            'https://thozhan-website-frontend.vercel.app',
             // Add your actual Netlify URL here if different
         ];
         // Allow requests with no origin (like mobile apps or curl requests)
