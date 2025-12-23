@@ -106,8 +106,8 @@ export const login = async (req, res) => {
         const cookieOptions = {
             maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
             httpOnly: true, // Prevents JavaScript access to cookie
-            secure: process.env.NODE_ENV === 'production', // Only HTTPS in production
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // 'none' for cross-origin in production
+            secure: true, // Always HTTPS for cross-origin
+            sameSite: 'none', // 'none' for cross-origin requests
             domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : undefined
         };
 
@@ -126,11 +126,11 @@ export const logout = async (req, res) => {
         const cookieOptions = {
             maxAge: 0,
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            secure: true,
+            sameSite: 'none',
             domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : undefined
         };
-        
+
         return res.status(200).cookie("token", "", cookieOptions).json({
             message: "Logged out successfully.",
             success: true
