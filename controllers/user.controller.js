@@ -107,8 +107,7 @@ export const login = async (req, res) => {
             maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
             httpOnly: true, // Prevents JavaScript access to cookie
             secure: true, // Always HTTPS for cross-origin
-            sameSite: 'none', // 'none' for cross-origin requests
-            domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : undefined
+            sameSite: 'none' // 'none' for cross-origin requests
         };
 
         return res.status(200).cookie("token", token, cookieOptions).json({
@@ -127,8 +126,7 @@ export const logout = async (req, res) => {
             maxAge: 0,
             httpOnly: true,
             secure: true,
-            sameSite: 'none',
-            domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : undefined
+            sameSite: 'none'
         };
 
         return res.status(200).cookie("token", "", cookieOptions).json({
