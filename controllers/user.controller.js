@@ -102,7 +102,7 @@ export const login = async (req, res) => {
             createdAt: user.createdAt
         }
 
-        // Cookie settings for cross-origin authentication
+        // Cookie settings for cross-origin authentication (for local development)
         const cookieOptions = {
             maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
             httpOnly: true, // Prevents JavaScript access to cookie
@@ -113,6 +113,7 @@ export const login = async (req, res) => {
         return res.status(200).cookie("token", token, cookieOptions).json({
             message: `Welcome back ${user.fullname}`,
             user,
+            token, // Include token in response for frontend to store
             success: true
         })
     } catch (error) {
