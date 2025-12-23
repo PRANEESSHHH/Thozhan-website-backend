@@ -415,7 +415,7 @@ export const getSavedJobs = async (req, res) => {
 
         // Find the user
         const user = await User.findById(userId);
-        
+
         if (!user) {
             return res.status(404).json({
                 message: "User not found",
@@ -450,7 +450,7 @@ export const getSavedJobs = async (req, res) => {
             });
         } catch (populateError) {
             console.error("Error while populating saved jobs:", populateError);
-            
+
             // Return just the IDs if population fails
             return res.status(200).json({
                 savedJobs: user.savedJobs,
@@ -460,6 +460,32 @@ export const getSavedJobs = async (req, res) => {
         }
     } catch (error) {
         console.error("Error in getSavedJobs:", error);
+        return res.status(500).json({
+            message: "Internal server error",
+            success: false
+        });
+    }
+};
+
+export const getProfile = async (req, res) => {
+    try {
+        const userId = req.id;
+
+        const user = await User.findById(userId).select('-password');
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+                success: false
+            });
+        }
+
+        return res.status(200).json({
+            user,
+            success: true
+        });
+    } catch (error) {
+        console.error("Error in getProfile:", error);
         return res.status(500).json({
             message: "Internal server error",
             success: false

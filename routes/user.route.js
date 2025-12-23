@@ -1,13 +1,14 @@
 import express from "express";
-import { 
-    login, 
-    logout, 
-    register, 
-    updateProfile, 
-    saveJob, 
-    unsaveJob, 
-    toggleSavedJob, 
-    getSavedJobs 
+import {
+    login,
+    logout,
+    register,
+    updateProfile,
+    saveJob,
+    unsaveJob,
+    toggleSavedJob,
+    getSavedJobs,
+    getProfile
 } from "../controllers/user.controller.js";
 import isAuthenticated from "../middlewares/isAuthenticated.js";
 import { singleUpload, multiUpload } from "../middlewares/mutler.js";
@@ -17,6 +18,7 @@ const router = express.Router();
 router.route("/register").post(singleUpload,register);
 router.route("/login").post(login);
 router.route("/logout").get(isAuthenticated,logout);
+router.route("/profile").get(isAuthenticated,getProfile);
 router.route("/profile/update").post(isAuthenticated,multiUpload,updateProfile);
 
 // Saved jobs routes
